@@ -1,0 +1,77 @@
+<div class="container">
+  <div>
+    <h3>List of Actors</h3>
+    <!--<ul>
+          <li *ngFor="let actor of actors; index as n">
+          {{n}}--  {{actor.name | titlecase}} -- {{actor.city}} -- 
+          {{actor.salary | currency:'INR'}}
+          <span><button (click)="deleteActor(n)">X</button></span>
+          </li>
+        </ul>-->
+    <table class="table  table-stripped table-hover">
+      <thead>
+        <th>Name</th>
+        <th>City</th>
+        <th>Salary</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let actor of actors; index as n" (dblclick)="editActor(n)" (keyup)="keyHandler($event)">
+          <td>
+            <span *ngIf="n!=selectedIndex">{{actor.name}}</span>
+            <span *ngIf="n==selectedIndex"></span>
+            <span><input type="text"[(ngModel)]="tempActor.name"></span>
+          </td>
+          <td> <span *ngIf="n!=selectedIndex">{{actor.city}}</span>
+            <span *ngIf="n==selectedIndex"></span>
+            <span><input type="text"[(ngModel)]="tempActor.city"></span>
+          </td>
+         
+          <td>
+              <span *ngIf="n!=selectedIndex">
+                  <button calss="btn btn-primary" (click)="editActor(n)">
+                    <i class="fa fa-pencil"></i>
+                  </button>
+                </span>
+            <span *ngIf="n!=selectedIndex">
+            <button calss="btn btn-danger" (click)="deleteActor(n)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </span>
+          <span *ngIf="n==selectedIndex">
+              <button calss="btn btn-danger" (click)="saveActor(n)">
+                <i class="fa fa-floppy-o"></i>
+              </button>
+            </span>
+            <span *ngIf="n==selectedIndex">
+                <button calss="btn btn-danger" (click)="cancelEdit()">
+                  <i class="fa fa-undo"></i>
+                </button>
+              </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <button (click)="toggleForm()">{{btnText}}</button>
+    <div *ngIf="formFlag">
+      <h3>Add Actor Form</h3>
+      Actor Name : <input type="text" [(ngModel)]="newActor.name"><br>
+      Actor City : <input type="text" [(ngModel)]="newActor.city"><br>
+      <button (click)="addActor()">Add</button>
+    </div>
+  </div>
+  <div>
+    <div>
+      <input type="text" [(ngModel)]="message">
+    </div>
+    <div> Your Message is {{message}}</div>
+    <div>Reversed message is {{ message |reversetext}}</div>
+    <div>
+      Reversed uppercased message{{message | reversetext | uppercase}}
+    </div>
+    <div>
+      Pglatin text:{{message | piglatin}}
+    </div>
+  </div>
+</div>
